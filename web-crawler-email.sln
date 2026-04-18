@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.37203.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-crawler-mail-service", "web-crawler-email\web-crawler-mail-service.csproj", "{5ED05624-0A65-C12E-32F8-C507EAA4B170}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-crawler-mail-test", "..\web-crawler-mail-test\web-crawler-mail-test.csproj", "{6BB94ADA-68E5-48C2-9DB9-A83A1DB1FC9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5ED05624-0A65-C12E-32F8-C507EAA4B170}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ED05624-0A65-C12E-32F8-C507EAA4B170}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ED05624-0A65-C12E-32F8-C507EAA4B170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BB94ADA-68E5-48C2-9DB9-A83A1DB1FC9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BB94ADA-68E5-48C2-9DB9-A83A1DB1FC9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BB94ADA-68E5-48C2-9DB9-A83A1DB1FC9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BB94ADA-68E5-48C2-9DB9-A83A1DB1FC9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
