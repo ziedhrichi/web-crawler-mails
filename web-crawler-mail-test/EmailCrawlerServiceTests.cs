@@ -4,6 +4,10 @@ using web_crawler_email.Services;
 
 namespace web_crawler_email.test
 {
+    /// <summary>
+    /// Tests unitaires pour la classe <see cref="EmailCrawlerService"/>. 
+    /// Ces tests vérifient que le service
+    /// </summary>
     public class EmailCrawlerServiceTests
     {
         #region Imports
@@ -15,6 +19,11 @@ namespace web_crawler_email.test
 
         #region Constructeur
 
+        /// <summary>
+        /// Initialise les mocks et le service à tester. 
+        /// Le mock de <see cref="IWebBrowser"/> est utilisé pour simuler 
+        /// les réponses HTML des pages web lors des tests.
+        /// </summary>
         public EmailCrawlerServiceTests()
         {
             _browserMock = new Mock<IWebBrowser>();
@@ -25,6 +34,11 @@ namespace web_crawler_email.test
 
         #region Méthodes d'aide
 
+        /// <summary>
+        /// Configure le mock de <see cref="IWebBrowser"/> pour retourner des contenus HTML 
+        /// spécifiques
+        /// </summary>
+        /// <param name="pages"></param>
         private void SetupBrowser(Dictionary<string, string> pages)
         {
             foreach (var page in pages)
@@ -35,6 +49,11 @@ namespace web_crawler_email.test
             }
         }
 
+        /// <summary>
+        /// Crée un ensemble de pages HTML de test avec des liens entre elles et 
+        /// des adresses e‑mail à extraire.
+        /// </summary>
+        /// <returns></returns>
         private Dictionary<string, string> CreateStandardPages()
         {
             return new Dictionary<string, string>
@@ -66,6 +85,10 @@ namespace web_crawler_email.test
 
         #region Tests
 
+        /// <summary>
+        /// Teste que le service peut parcourir une page de départ et ses pages enfants 
+        /// jusqu'à une profondeur de 2,
+        /// </summary>
         [Fact]
         public void Should_Crawl_All_Pages_And_Extract_All_Emails()
         {
@@ -82,6 +105,10 @@ namespace web_crawler_email.test
             Assert.Contains("loin@mozilla.org", result);
         }
 
+        /// <summary>
+        /// Teste que le service respecte la profondeur maximale spécifiée et n'explore pas 
+        /// les pages enfants au-delà de cette profondeur.
+        /// </summary>
         [Fact]
         public void Should_Respect_MaxDepth()
         {
@@ -96,6 +123,10 @@ namespace web_crawler_email.test
             Assert.Contains("nullepart@mozilla.org", result);
         }
 
+        /// <summary>
+        /// Teste que le service s'arrête à la profondeur spécifiée et n'explore pas 
+        /// les pages enfants au-delà de cette profondeur.
+        /// </summary>
         [Fact]
         public void Should_Stop_At_Depth_One()
         {
@@ -111,6 +142,10 @@ namespace web_crawler_email.test
             Assert.DoesNotContain("loin@mozilla.org", result);
         }
 
+        /// <summary>
+        /// Test que le service peut parcourir indéfiniment les pages enfants 
+        /// tant que des liens non visités sont disponibles,
+        /// </summary>
         [Fact]
         public void Should_Explore_All_When_Depth_Is_Minus_One()
         {
@@ -124,6 +159,9 @@ namespace web_crawler_email.test
             Assert.Equal(3, result.Count);
         }
 
+        /// <summary>
+        /// Test que le service gère correctement les boucles de liens entre les pages
+        /// </summary>
         [Fact]
         public void Should_Not_Loop_When_Pages_Reference_Each_Other()
         {
@@ -150,6 +188,9 @@ namespace web_crawler_email.test
             Assert.Contains("b@test.com", result);
         }
 
+        /// <summary>
+        /// Test que le service retourne une liste d'adresses e‑mail uniques, même si les mêmes adresses
+        /// </summary>
         [Fact]
         public void Should_Not_Return_Duplicate_Emails()
         {
@@ -163,6 +204,10 @@ namespace web_crawler_email.test
             Assert.Equal(result.Count, result.ToHashSet().Count);
         }
 
+        /// <summary>
+        /// Test que le service gère correctement les pages manquantes 
+        /// ou les erreurs de récupération du HTML
+        /// </summary>
         [Fact]
         public void Should_Handle_Missing_Page()
         {
@@ -181,6 +226,10 @@ namespace web_crawler_email.test
             Assert.Equal(2, result.Count);
         }
 
+        /// <summary>
+        /// Test que le service gère correctement les cas où la page de départ 
+        /// est introuvable ou retourne null
+        /// </summary>
         [Fact]
         public void Should_Return_Empty_When_Start_Page_Is_Null()
         {
@@ -196,6 +245,9 @@ namespace web_crawler_email.test
             Assert.Empty(result);
         }
 
+        /// <summary>
+        /// Test que le service gère correctement les cas où aucune adresse e‑mail n'est trouvée
+        /// </summary>
         [Fact]
         public void Should_Return_Empty_When_No_Email_Found()
         {
@@ -215,6 +267,10 @@ namespace web_crawler_email.test
             Assert.Empty(result);
         }
 
+        /// <summary>
+        /// Test que le service ignore les liens invalides ou non pertinents (comme les liens vides, les liens JavaScript, 
+        /// les liens mailto sans adresse valide, etc.)
+        /// </summary>
         [Fact]
         public void Should_Ignore_Invalid_Links()
         {
@@ -237,6 +293,10 @@ namespace web_crawler_email.test
             Assert.Contains("test@test.com", result);
         }
 
+        /// <summary>
+        /// Test que le service peut résoudre correctement les liens relatifs 
+        /// par rapport à leur URL de base
+        /// </summary>
         [Fact]
         public void Should_Resolve_Relative_Urls()
         {
@@ -259,6 +319,10 @@ namespace web_crawler_email.test
             Assert.Contains("test@test.com", result);
         }
 
+        /// <summary>
+        /// Test que le service ignore les liens mailto invalides ou vides 
+        /// et ne les traite pas comme des adresses e‑mail valides
+        /// </summary>
         [Fact]
         public void Should_Ignore_Invalid_Mailto()
         {

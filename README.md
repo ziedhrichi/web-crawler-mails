@@ -19,12 +19,17 @@ La récupération du HTML est abstraite via l’interface IWebBrowser, ce qui fa
 ## Fonctionnement
 
 1- Démarrer à partir d’une URL initiale
+
 2- Extraire :
+
    - les e-mails (mailto:)
    - les liens (href)
+     
 3- Parcourir les pages liées jusqu’à la profondeur définie
+
 4- Éviter de revisiter les pages déjà traitées
-Retourner une liste d’adresses e-mail uniques
+
+5- Retourner une liste d’adresses e-mail uniques
 
 ## Choix techniques
 
